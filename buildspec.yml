@@ -2,14 +2,32 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      java: corretto17
     commands:
       - echo Installing Maven...
       - mvn --version
   build:
     commands:
       - echo Build started on `date`
-      - mvn clean install
+      - mvn clean install -DskipTests
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Uploading build artifact to S3...
+      - |
+        aws s3 cp target/*.jar s3://elasticbeanstalk-us-east-2-108782066873/app.jar
+      - echo Creating new application version...
+      - |
+        aws elasticbeanstalk create-application-version \
+          --application-name springbootapp \
+          --version-label "ver-$(date +%s)" \
+          --source-bundle S3Bucket=elasticbeanstalk-us-east-2-108782066873,S3Key=app.jar
+      - echo Updating environment...
+      - |
+        aws elasticbeanstalk update-environment \
+          --environment-name Springbootapp-env \
+          --version-label "ver-$(date +%s)"
 artifacts:
   files:
     - target/*.jar
-  discard-paths: yes
