@@ -16,7 +16,7 @@ phases:
       - echo Build completed on `date`
       - echo Uploading build artifact to S3...
       - |
-        aws s3 cp target/*.jar s3://elasticbeanstalk-us-east-2-108782066873/app.jar
+        aws s3 cp target/app.jar s3://elasticbeanstalk-us-east-2-108782066873/app.jar
       - echo Creating new application version...
       - |
         aws elasticbeanstalk create-application-version \
