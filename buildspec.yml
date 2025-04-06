@@ -1,17 +1,15 @@
 version: 0.2
+
 phases:
   install:
     commands:
-      - echo "Installing dependencies..."
-      - ./gradlew dependencies  # or your build tool command
+      - echo Installing Maven...
+      - mvn --version
   build:
     commands:
-      - echo "Building the application..."
-      - ./gradlew build         # or your build command
-  post_build:
-    commands:
-      - echo "Packaging the artifact..."
-      - cp build/libs/your-app.jar your-app.jar
+      - echo Build started on `date`
+      - mvn clean install
 artifacts:
   files:
-    - your-app.jar
+    - target/*.jar
+  discard-paths: yes
