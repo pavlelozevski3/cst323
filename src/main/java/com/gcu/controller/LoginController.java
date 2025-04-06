@@ -29,7 +29,7 @@ public class LoginController {
 	@GetMapping("/")
 	public String display(Model model) {
 		// Display Login Form View
-		model.addAttribute("title", "Login Form");
+		model.addAttribute("title", "Updated Login Form");
 		model.addAttribute("loginModel", new LoginModel());
 		return "login";
 	}
@@ -44,7 +44,7 @@ public class LoginController {
 	    // Check for validation errors
 	    if (bindingResult.hasErrors())
 	    {
-	        model.addAttribute("title", "Updated Login Form");
+	        model.addAttribute("title", "Login Form");
 	        return "login";
 	    }
 
