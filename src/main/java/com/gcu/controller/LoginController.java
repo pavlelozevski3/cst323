@@ -44,7 +44,7 @@ public class LoginController {
 	    // Check for validation errors
 	    if (bindingResult.hasErrors())
 	    {
-	        model.addAttribute("title", "Login Form");
+	        model.addAttribute("title", "Updated Login Form");
 	        return "login";
 	    }
 
