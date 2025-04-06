@@ -14,10 +14,9 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Uploading build artifact to S3...
-      - |
-        aws s3 cp target/app.jar s3://elasticbeanstalk-us-east-2-108782066873/app.jar
-      - echo Creating new application version...
+      - echo Uploading app.jar to S3...
+      - aws s3 cp target/app.jar s3://elasticbeanstalk-us-east-2-108782066873/app.jar
+      - echo Creating new Elastic Beanstalk app version...
       - |
         aws elasticbeanstalk create-application-version \
           --application-name springbootapp \
@@ -30,4 +29,4 @@ phases:
           --version-label "ver-$(date +%s)"
 artifacts:
   files:
-    - target/*.jar
+    - target/app.jar
