@@ -29,7 +29,7 @@ public class LoginController {
 	@GetMapping("/")
 	public String display(Model model) {
 		// Display Login Form View
-		model.addAttribute("title", "Updated Login Form");
+		model.addAttribute("title", "Demo Login Form");
 		model.addAttribute("loginModel", new LoginModel());
 		return "login";
 	}
